@@ -1,6 +1,6 @@
 # hugo-future-imperfect
 
-A modern theme for the Hugo static site generator. 
+A modern theme for the [Hugo](https://gohugo.io/) static site generator. 
 
 This is a heavily modified version of [Julio Pescador's Future Imperfect](https://github.com/jpescador/hugo-future-imperfect), which itself is a port of [HTML5 UP's theme](http://html5up.net/future-imperfect)
 by the same name. The latest version can be seen at my personal website [reillywood.com](https://reillywood.com).
