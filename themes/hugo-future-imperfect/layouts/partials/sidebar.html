@@ -1,0 +1,133 @@
+<!-- Sidebar -->
+<!-- <section id="sidebar" > -->
+
+<!-- Intro -->
+<section id="intro" class="text-center mb-5 uppercase w-full xl:w-sidebar ">
+  {{ $pic := .Site.Params.intro.pic }}
+  {{ with $pic.src }}
+  {{ if $pic.circle }}
+  <a href='{{"/" | relURL}}'><img src="{{ . | relURL }}" class="rounded-full inline" width="{{ $pic.width }}"
+      alt="{{ $pic.alt }}" /></a>
+  {{ else }}
+  <a href='{{"/" | relURL}}'><img src="{{ . | relURL }}" width="{{ $pic.width }}" alt="{{ $pic.alt }}" /></a>
+  {{ end }}
+  {{ end }}
+  {{ with .Site.Params.intro }}
+  <header>
+    <h2 class="mt-2 mb-2 text-2xl tracking-widest font-black dark:text-solarized-base1">
+      <a href='{{"/" | relURL}}'>
+      {{ .header }}
+    </a>
+    </h2>
+    <p class="mx-2 dark:text-solarized-base0 font-sans tracking-widest text-xs">{{ .paragraph | safeHTML }}</p>
+  </header>
+  {{ end }}
+  <ul class="icons mt-3 dark:text-gray-500">
+    <li>
+      <a href='{{ with .OutputFormats.Get "RSS" }}{{ .RelPermalink }}{{ end }}' type="application/rss+xml" target="_blank" title="RSS" class="icon-rss"></a>
+    </li>
+    {{ partial "social" . }}
+  </ul>
+</section>
+
+<section id="etc" class="xl:w-sidebar border-t border-gray-border pt-5 mx-4 md:mx-0">
+  <!-- Posts List -->
+  <section id="recent-posts">
+    <div class="mini-posts mb-5">
+      <header>
+        <h3 class="mb-3 tracking-widest text-center xl:text-left dark:text-solarized-base00">Recent Posts</h3>
+      </header>
+      <div class="posts-container">
+        {{ $.Scratch.Set "recentPosts" .Site.Pages }}
+
+        {{ with .Site.Params.postAmount.sidebar }}
+        {{ $.Scratch.Set "postLimit" . }}
+        {{ else }}
+        {{ $.Scratch.Set "postLimit" 5 }}
+        {{ end }}
+
+        {{ range first ($.Scratch.Get "postLimit") (where ($.Scratch.Get "recentPosts") "Type" "post") }}
+        <a href="{{ .RelPermalink }}" 
+        class="button block bg-white dark:bg-solarized-base02 px-4 py-3 mb-3">
+          <h3 class="mb-1 font-extrabold dark:text-solarized-base00">
+            {{ .Title }}
+          </h3>
+          {{ $.Scratch.Set "dateType" .Date }}
+          <time class="published text-gray-subtitle dark:text-solarized-base00 text-xxs"
+            datetime='{{ ($.Scratch.Get "dateType").Format "2006-01-02" }}'>
+            {{ ($.Scratch.Get "dateType").Format "January 2, 2006" }}
+          </time>
+        </a>
+        {{ end }}
+      </div>
+
+      {{ if ge (len (where .Site.Pages "Type" "post")) ($.Scratch.Get "postLimit") }}
+        <a href="/blog/" class="button dark:bg-solarized-base02 dark:text-solarized-base00">View more posts</a>
+      {{ end }}
+    </div>
+  </section>
+
+  <!-- This if statement only applies if someone goes to the /categories url -->
+  <!-- Otherwise this section is shown for all other links -->
+  {{ if ne ($.Scratch.Get "showCategories") false }}
+  <!-- Categories List -->
+  <section id="categories" class="py-5 border-t border-gray-border">
+    <header class="mb-3 dark:text-solarized-base00">
+      <h3>
+        <a href="/categories/">Top Categories</a>
+      </h3>
+    </header>
+
+    {{range first 10 .Site.Taxonomies.categories.ByCount}}
+    <article>
+      <header style="margin-bottom: 0.9rem">
+        <a href="/categories/{{ .Name | urlize }}/" class="dark:text-solarized-base00">{{ .Page.Title  }}</a>
+        <!-- TODO: this is silly, do something better to align the links and counts -->
+        <span style="float:right; margin-top: 0.2rem;"
+          class="text-gray-header bg-gray-border border rounded-full px-2 justify-center 
+          items-center text-xs font-medium rounded-full dark:border-solarized-base01 dark:bg-solarized-base02 dark:text-solarized-base1">
+          {{ .Count }}
+        </span>
+      </header>
+    </article>
+    {{end}}
+
+    <a href="/categories/" class="button dark:bg-solarized-base02 dark:text-solarized-base00">View all categories</a>
+
+  </section>
+  {{ end }}
+
+  <!-- About -->
+  {{ with .Site.Params.intro.about }}
+  <section id="mini-bio" class="border-t border-gray-border py-5">
+    <h3 class="dark:text-solarized-base00">About</h3>
+    <p class="text-gray-subtitle dark:text-solarized-base00 text-sm leading-loose py-2 ">{{ . | safeHTML }}</p>
+    <a href="/about/" class="button dark:bg-solarized-base02 dark:text-solarized-base00">Learn More / Contact me</a>
+  </section>
+  {{ end }}
+
+  <!-- Footer -->
+  <section id="footer" class="border-t border-gray-border pt-5 text-center text-gray-subtitle">
+    <ul class="icons">
+      <li>
+        <a href='{{ with .OutputFormats.Get "RSS" }}{{ .RelPermalink }}{{ end }}' type="application/rss+xml" target="_blank" title="RSS" class="icon-rss"></a>
+      </li>
+      {{ partial "social" . }}
+    </ul>
+    <p class="copyright text-gray-subtitle text-xxxs pt-4 opacity-75 uppercase font-sans tracking-widest">
+      {{ with .Site.Copyright | safeHTML }}
+      {{ . }}
+      {{ else }}
+      &copy; {{ .Site.LastChange.Year }}
+      {{if isset .Site.Params "author" }}
+      {{ .Site.Params.author}}.
+      {{ else }}
+      {{ .Site.Title }}.
+      {{ end }}
+      {{end}}
+      Powered by a heavily modified <a
+        href="https://github.com/jpescador/hugo-future-imperfect" target="_blank">Future Imperfect</a>.
+    </p>
+  </section>
+
+</section>

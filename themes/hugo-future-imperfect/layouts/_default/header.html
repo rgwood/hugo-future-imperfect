@@ -1,0 +1,8 @@
+<header class="border-b border-gray-border">
+    <div class="title p-6 text-center sm:text-left dark:text-solarized-base0">
+        <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+        {{ with .Description }}
+            <p>{{ . }}</p>
+        {{ end }}
+    </div>
+</header>

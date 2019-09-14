@@ -1,0 +1,4 @@
+<!-- Things break badly if the inner content doesn't have whitespace removed - that results in a <p> tag around the closing div of this, somehow -->
+<div class='carousel {{if .Get "border"}}border border-gray-border{{end}}'>
+    {{- .Inner -}}
+</div>

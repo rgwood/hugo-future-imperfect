@@ -1,0 +1,12 @@
+<article class="{{partial "post-classes"}}">
+  {{ .Render "header" }}
+
+  {{ .Render "featured" }}
+  <div id="content" class="{{partial "content-classes"}}">
+    {{ .Content }}
+    <footer class="sm:mt-6">
+        {{ .Render "footer-category" }}
+    </footer>
+  </div>
+</article>
+{{ .Render "prev-next" }}

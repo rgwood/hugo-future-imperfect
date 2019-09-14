@@ -1,0 +1,25 @@
+{{ $imagePath := .Get "imagePath"}}
+<div class="card border-gray-border border bg-gray-background dark:bg-solarized-base03 lg:flex p-4">
+        <div class="title lg:hidden mb-3">
+                <h1>{{with .Get "title"}}{{. | markdownify}}{{end}}</h1>
+        </div>
+        <div
+                class='carousel {{if .Get "border"}}border border-gray-border{{end}} lg:mr-5 lg:flex-none lg:order-first lg:w-80'>
+                <div class="carousel-cell">
+                        <!-- no sizes specified for srcset because we want images that fill the viewport in fullscreen -->
+                        <figure class="relative">
+                                <!-- Default to 2000px wide if width not specified. 2000px ought to be enough for anybody. -->
+                                <img class='carousel-image {{with .Get "height"}}height-{{.}}{{end}}'
+                                        data-flickity-lazyload-src='https://res.cloudinary.com/reilly-wood/image/upload/f_auto,c_limit,w_{{with .Get "width"}}{{.}}{{else}}2000{{end}}/{{$imagePath}}' />
+                        </figure>
+                </div>
+        </div>
+        <div class="content">
+                <div class="title hidden lg:block mb-2">
+                        <h1>{{with .Get "title"}}{{. | markdownify}}{{end}}</h1>
+                </div>
+                {{- with .Inner -}}
+                {{- . | markdownify -}}
+                {{- end -}}
+        </div>
+</div>

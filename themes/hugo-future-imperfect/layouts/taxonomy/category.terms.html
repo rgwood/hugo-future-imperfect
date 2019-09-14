@@ -1,0 +1,36 @@
+{{ partial "general-title" . }}
+
+{{ partial "header" . }}
+{{ partial "navbar" . }}
+<!-- Main -->
+<div id="main">
+    {{ if .Site.Params.categoriesByCount }}
+    {{ $.Scratch.Set "categories" .Data.Terms.ByCount }}
+    {{ else }}
+    {{ $.Scratch.Set "categories" .Data.Terms.Alphabetical }}
+    {{ end }}
+
+    <article class="{{partial "post-classes"}}">
+        {{ .Render "header" }}
+        <div id="content" class="{{partial "content-classes"}}">
+            <!-- This is an ugly way to group terms by count, because 
+                Hugo only supports grouping for pages. I miss LINQ! -->
+            {{range .Data.Terms.ByCount }}
+            {{ $currCount := $.Scratch.Get "currCount" }}
+            {{if ne $currCount .Count}}
+            <h3>{{.Count}} post{{if gt .Count 1}}s{{end}}</h3>
+            {{$.Scratch.Set "currCount" .Count}}
+            {{end}}
+
+            <a href="{{ .Name | urlize }}" class="border border-solid border-gray-border hover:border-teal-hover 
+            bg-gray-background text-gray-header dark:bg-solarized-base03 dark:text-solarized-base00 mr-1 my-1 px-2 py-1 inline-block text-xs">
+                {{ .Page.Title }}
+            </a>
+            {{end}}
+        </div>
+    </article>
+</div>
+
+{{ $.Scratch.Set "showCategories" false }}
+{{ partial "sidebar" . }}
+{{ partial "footer" . }}

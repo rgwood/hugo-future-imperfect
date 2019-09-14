@@ -1,0 +1,9 @@
+{{ partial "header" . }}
+    {{ partial "navbar" . }}
+    <!-- Main -->
+    <div id="main">
+        <!-- Post -->
+        {{ .Render "content-single" }}
+    </div>
+    {{ partial "sidebar" . }}
+{{ partial "footer" . }}

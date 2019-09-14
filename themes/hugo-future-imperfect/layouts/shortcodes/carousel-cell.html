@@ -1,0 +1,21 @@
+{{ $path := .Get "path"}}
+<div class="carousel-cell">
+        <!-- no sizes specified for srcset because we want images that fill the viewport in fullscreen -->
+        <figure class="relative">
+                <!-- Default to 2000px wide if width not specified. 2000px ought to be enough for anybody. -->
+                <img class='carousel-image {{with .Get "height"}}height-{{.}}{{end}}' 
+                        data-flickity-lazyload-src='https://res.cloudinary.com/reilly-wood/image/upload/f_auto,c_limit,w_{{with .Get "width"}}{{.}}{{else}}2000{{end}}/{{$path}}' />
+                        <!-- For some reason I can't get Flickity to play nice with srcset on mobile. When using srcset,
+                        if you rotate a phone from portrait to landscape, the image will not load full width in landscape -->
+                        <!-- data-flickity-lazyload-srcset="https://res.cloudinary.com/reilly-wood/image/upload/f_auto,c_limit,w_512/{{$path}} 512w,
+        https://res.cloudinary.com/reilly-wood/image/upload/f_auto,c_limit,w_1024/{{$path}} 1024w,
+        https://res.cloudinary.com/reilly-wood/image/upload/f_auto,c_limit,w_2048/{{$path}} 2048w,
+        https://res.cloudinary.com/reilly-wood/image/upload/f_auto,c_limit,w_4096/{{$path}} 4096w" -->
+                {{with .Inner}}
+                <figcaption
+                        class="carousel-image-caption absolute bottom-0 left-0 right-0 text-solarized-base2 font-sans p-1"
+                        style="background-color: hsla(0, 0%, 0%, 0.5)">
+                        {{. | markdownify}}
+                </figcaption>{{end}}
+        </figure>
+</div>

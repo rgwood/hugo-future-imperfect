@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<!--
+    Future Imperfect by HTML5 UP
+    html5up.net | @n33co
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+    <head>
+        {{ with $.Scratch.Get "generalTitle" }}
+            <title>{{ . }}</title>
+        {{ else }}
+            {{ with .Title }}
+                <title>{{ . }}</title>
+            {{ else }}
+                <title>{{ .Site.Title }}</title>
+            {{ end }}
+        {{ end }}
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {{ hugo.Generator }}
+        {{ partial "favicon" . }}
+
+        {{ with .Params.author }}
+            <meta name="author" content="{{ . }}">
+        {{ end }}
+        {{ with .Description }}
+            <meta name="description" content="{{ . }}">
+        {{ else }}
+            {{ with .Site.Params.description }}
+                <meta name="description" content="{{ . }}">
+            {{ end }}
+        {{ end }}
+
+        {{ template "_internal/schema.html" . }}
+        <!-- TODO: try inlining this -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,800,900|Source+Sans+Pro:400,700">
+        {{ $rawStyles := resources.Get "css/main.css" }}
+        {{ $flickity := resources.Get "css/flickity.css"}}
+        {{ $flickityFullscreen := resources.Get "css/flickity.fullscreen.css"}}
+        {{ $flickityCustomization := resources.Get "css/flickity.custom.css"}}
+        {{ $tailwindStyles := resources.Get "css/tailwind.css" | resources.PostCSS }}
+        {{ $syntax := resources.Get "css/syntax.css" }}
+        {{ $bundledStyles := slice $rawStyles $tailwindStyles $flickity $flickityFullscreen $flickityCustomization $syntax | resources.Concat "css/bundle.css" | minify }}
+        <link rel="stylesheet" href="{{ $bundledStyles.RelPermalink }}">
+
+        <!-- Icomoon CSS doesn't like being bundled for some reason -->
+        {{ $icomoon := resources.Get "css/icomoon.css" }}
+        <link rel="stylesheet" href="{{ $icomoon.RelPermalink }}">
+    </head>
+    <body class="bg-gray-background dark:bg-solarized-base03 pt-12">
+
+    <!-- Wrapper -->
+    <div id="wrapper" class="py-5 md:px-10 xl:py-10 max-w-7xl">

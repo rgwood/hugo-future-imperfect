@@ -1,0 +1,16 @@
+<article class="{{partial "post-classes"}}">
+  {{ .Render "header" }}
+
+  {{ .Render "featured" }}
+  <div id="content" class="{{partial "content-classes"}}">
+    {{ .Summary }}
+    
+        {{ if .Truncated }}
+        <footer>
+          <a href="{{ .RelPermalink }}" class="button w-full sm:w-auto text-center mt-3">Continue reading</a>
+        </footer>
+        {{end}}
+  </div>
+
+</article>
+<!--{{ .Render "prev-next" }}-->

@@ -1,0 +1,95 @@
+baseurl = "https://www.reillywood.com/"
+languageCode = "en-us"
+title = "Reilly Wood"
+theme = "hugo-future-imperfect"
+preserveTaxonomyNames = true
+paginate = 5
+pluralizeListTitles = false
+
+pygmentsCodefences = true
+pygmentsUseClasses = true
+pygmentsCodefencesGuessSyntax = true
+
+[params]
+  # Sets the meta tag description
+  description          = "Things that don't quite fit in 280 characters."
+  # Sets the navbarTitle that appears in the top left of the navigation bar
+  navbarTitle          = "Reilly Wood"
+  # Sets where "View More Posts" links
+  viewMorePostLink     = "/blog/"
+
+  # Use this for custom Google/DDG search
+  searchDomain = "reillywood.com"
+
+# Optional Params
+  # Sets navbarTitle to match the section of the website
+  dynamicTitles        = true
+  # Sets Categories to sort by number of posts instead of alphabetical
+  categoriesByCount    = true
+  # Sets Estimated Reading Time to appear in post headers
+  includeReadingTime   = true
+  # Sets the Favicon and Version for the site. Default support is for
+  # apple-touch-icon-precomposed.png, favicon.png, favicon.ico, and mstile.png.
+  # These are stored in the favicon folder. See the following for more information:
+  # https://github.com/audreyr/favicon-cheat-sheet
+  loadFavicon          = false
+  faviconVersion       = ""
+
+  # These are optional params related to the sidebar. They are recommended, but not
+  # required for proper functionality. HTML is supported within the params.
+[params.intro]
+  header    = "Cities & Code"
+
+  paragraph = "Things that don't quite fit in 280 characters."
+
+  about     = "I'm a software engineer in Vancouver, Canada. I'm interested in databases, urban planning, computing history, and whatever else catches my fancy."
+
+  # This appears at the top of the sidebar above params.intro.header.
+  # A width of less than 100px is recommended from a design perspective.
+  [params.intro.pic]
+    src       = "/img/main/headshot.jpg"
+    # Sets Image to be a cirlce
+    circle    = true
+    # Sets Image to be Future Imperfect's hexagon
+    imperfect = true
+    width     = "100"
+    alt       = "headshot"
+
+[params.postAmount]
+# Sets the number of recent posts to show in the sidebar. The default value is 5.
+    sidebar = 5
+
+# Sets the menu items in the navigation bar
+# Identifier prepends a Font Awesome icon to the menu item
+[[menu.main]]
+  name = "Home"
+  url = "/"
+  identifier = "icon-home"
+  weight = 1
+
+[[menu.main]]
+  name = "About"
+  url = "/about/"
+  identifier = "icon-id-card-o"
+  weight = 2
+
+#[[menu.main]]
+#  name = "Blog"
+#  url = "/blog/"
+#  identifier = "fa fa-newspaper-o"
+#  weight = 3
+
+[[menu.main]]
+  name = "Projects"
+  url = "/projects/"
+  identifier = "icon-laptop"
+  weight = 3
+
+
+# Sets Social Media icons to appear and link to your account. Value should be your
+# username unless otherwise noted.
+[social]
+  github          = "rgwood"
+  stackoverflow   = "854694" # User Number
+  linkedin        = "reilly-wood-912a31a"
+  twitter         = "reillywood"

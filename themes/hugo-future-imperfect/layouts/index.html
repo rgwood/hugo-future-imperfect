@@ -1,0 +1,12 @@
+{{ partial "header" . }}
+    {{ partial "navbar" . }}
+    <div id="main">
+    {{ $paginator := .Paginate (where .Site.Pages "Type" "post") }}
+    {{ range $paginator.Pages }}
+            {{ .Render "content-homepage" }}
+        {{ end }}
+        {{ partial "pagination" . }}
+    </div>
+    {{ partial "sidebar" . }}
+{{ partial "footer" . }}
+

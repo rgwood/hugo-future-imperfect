@@ -1,0 +1,15 @@
+{{ partial "general-title" . }}
+
+{{ partial "header" . }}
+    {{ partial "navbar" . }}
+    <!-- Main -->
+    <div id="main">
+        <article class="{{partial "post-classes"}}">
+            {{ .Render "header" }}
+            <div id="content" class="{{partial "content-classes"}}">
+                {{ .Content }}
+            </div>
+        </article>
+    </div>
+    {{ partial "sidebar" . }}
+{{ partial "footer" . }}

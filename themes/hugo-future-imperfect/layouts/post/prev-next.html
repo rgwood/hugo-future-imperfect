@@ -1,0 +1,17 @@
+<ul class="actions pagination -mt-3 mx-8 mb-5 md:mx-0 text-center md:text-left ">
+    {{ if .PrevInSection }}
+        <li class="block mb-2 md:inline-block md:mr-2">
+                <a href="{{ .PrevInSection.RelPermalink }}"
+                class="button bg-white w-full dark:bg-solarized-base02 dark:text-solarized-base00">
+                <i class="icon-long-arrow-left text-gray-icons dark:text-solarized-base00"></i>
+                {{ .PrevInSection.Title }}</a></li>
+    {{ end }}
+
+    {{ if .NextInSection }}
+        <li class="block md:inline-block md:mr-2"><a href="{{ .NextInSection.RelPermalink }}"
+                class="button bg-white w-full dark:bg-solarized-base02 dark:text-solarized-base00">
+                {{ .NextInSection.Title }}
+                <i class="icon-long-arrow-right text-gray-icons dark:text-solarized-base00"></i>
+        </a></li>
+    {{ end }}
+</ul>

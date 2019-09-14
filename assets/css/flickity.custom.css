@@ -1,0 +1,136 @@
+.carousel-cell {
+  /* Margin screws things up - occasionally we end up with an empty cell to the right of a very wide image.
+  If we need to space cells out, should probably use padding instead? */
+  /* margin-right: 10px; */
+  /* vertically center */
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  /* min-width: max-content; */
+  /* min-width: 150px; */
+  /* max-width: 100%; */
+  /* width: max-content; */
+  /* max-width: 100%; */
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+div.carousel.is-fullscreen .carousel-cell {
+  max-width: 100%;
+}
+
+.carousel-cell.lazyload-finished {
+  opacity: 1;
+}
+
+.carousel-image {
+  display: block;
+  /* set min-width, allow images to set cell width */
+  min-width: 150px;
+  max-width: 100%;
+  /* margin-right: 10px; */
+  /* vertically center */
+  cursor: zoom-in;
+}
+
+.carousel-image.height-small {
+  max-height: 15rem;
+}
+
+.carousel-image.height-medium {
+  max-height: 30rem;
+}
+
+.carousel-image.flickity-lazyloaded,
+.carousel-image.flickity-lazyerror {
+  opacity: 1;
+}
+
+.carousel:not(.is-fullscreen) .carousel-cell:not(.is-selected) {
+  opacity: 0;
+}
+
+/* Dim images in dark mode. From http://markdotto.com/2018/11/05/css-dark-mode/ */
+@media (prefers-color-scheme: dark) {
+  .carousel:not(.is-fullscreen) img.carousel-image.flickity-lazyloaded{
+    opacity: 0.75;
+    transition: opacity 0.5s ease-in-out;
+  }
+  .carousel:not(.is-fullscreen) img.carousel-image.flickity-lazyloaded:hover {
+    opacity: 1;
+  }
+}
+
+div.carousel.is-fullscreen .flickity-viewport {
+  cursor: zoom-out;
+}
+
+div.carousel.is-fullscreen .flickity-viewport .carousel-cell :not(img) {
+  cursor: grab;
+}
+
+div.carousel.is-fullscreen {
+  padding: 0;
+  border: 0;
+}
+
+.carousel.is-fullscreen .carousel-cell .carousel-image {
+  height: auto;
+  max-height: 100vh;
+}
+
+.carousel.is-fullscreen .carousel-cell:not(.is-selected) .carousel-image {
+  cursor: pointer;
+  opacity: 0.25;
+}
+
+.carousel.is-fullscreen .carousel-cell.is-selected .carousel-image {
+  cursor: zoom-out;
+}
+
+#content .flickity-enabled.is-fullscreen {
+  z-index: 51;
+}
+
+.carousel .flickity-button:disabled {
+  /* display: none; */
+  /* visibility: hidden; */
+  opacity: 0;
+  transition: visibility 0s, opacity 0.2s linear;
+}
+.flickity-page-dots {
+  display: none;
+}
+
+#content .flickity-fullscreen-button-view {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  #content .flickity-prev-next-button {
+    /* opacity: 0.4 */
+  }
+}
+
+.flickity-button,
+.carousel-image-caption {
+  transition: opacity 0.2s linear;
+}
+html.is-flickity-fullscreen.idle .flickity-button,
+html.is-flickity-fullscreen.idle .carousel-image-caption {
+  opacity: 0;
+}
+
+.flickity-button.flickity-fullscreen-button-exit {
+  opacity: 0.5;
+  background-color: white;
+  color: black;
+}
+
+.flickity-button.flickity-fullscreen-button-exit:hover {
+  opacity: 0.9;
+}

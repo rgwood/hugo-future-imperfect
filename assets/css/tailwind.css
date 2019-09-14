@@ -1,0 +1,221 @@
+@tailwind base;
+
+.button {
+  @apply border border-gray-border px-4 py-2 inline-block text-xs border-solid font-sans uppercase tracking-wider;
+}
+
+.button :not(time) {
+  @apply font-extrabold;
+}
+
+.button:hover {
+  @apply border-teal-hover;
+}
+
+.button:hover i {
+  @apply text-teal-hover;
+}
+
+@media (prefers-color-scheme: dark) {
+  .button:hover {
+    @apply border-solarized-blue;
+  }
+
+  .button:hover i {
+    @apply text-solarized-blue;
+  }
+}
+
+pre.chroma {
+  @apply text-sm border border-gray-border p-2;
+}
+
+@media (prefers-color-scheme: dark) {
+  :not(pre) > code {
+    @apply text-solarized-base2 text-base m-0;
+  }
+}
+
+h1,
+h2,
+h3,
+h4 {
+  @apply font-sans font-extrabold uppercase;
+}
+@media (prefers-color-scheme: light) {
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply text-gray-header;
+  }
+}
+body,
+input,
+select,
+textarea {
+  @apply font-main;
+}
+h1,
+h2 {
+  @apply tracking-widest;
+}
+
+h4 {
+  @apply text-xs;
+}
+
+#content h1,
+#content h2,
+h3,
+h4 {
+  @apply tracking-wider;
+}
+
+/* Links */
+a {
+  @apply border-gray-border border-b;
+}
+
+@media (prefers-color-scheme: dark) {
+  a {
+    @apply border-solarized-blue;
+  }
+}
+
+/* Hide border for most links outside of #content  */
+/* h1 a, h2 a, h3 a, h4 a, */
+.post header a,
+#categories h3 a,
+#intro a,
+#navbar-header a,
+.icons a {
+  @apply border-b-0;
+}
+
+#content > h1:not(:first-child),
+#content > h2:not(:first-child),
+#content > h3:not(:first-child),
+#content > h4:not(:first-child) {
+  @apply mt-4;
+}
+
+#content > h1:not(:last-child),
+#content > h2:not(:last-child),
+#content > h3:not(:last-child),
+#content > h4:not(:last-child) {
+  @apply mb-4;
+}
+
+#content > p:not(:first-child),
+#content > div:not(:first-child):not(.is-fullscreen) {
+  @apply mt-3;
+}
+
+#content p:not(:last-of-type) {
+  @apply mb-3;
+}
+
+blockquote {
+  @apply border-l-3 italic pl-4 py-3 my-5;
+}
+
+@media (prefers-color-scheme: dark) {
+  blockquote {
+    @apply border-solarized-base01 bg-solarized-base03;
+  }
+}
+
+a:hover {
+  @apply text-teal-hover;
+}
+
+@media (prefers-color-scheme: dark) {
+  a:hover {
+    @apply text-solarized-blue;
+  }
+}
+
+a:hover:not(#back-to-top):not(.button) {
+  @apply border-transparent;
+}
+
+/* Force h3 in recent post link to change color when parent a is hovered */
+a:hover h3,
+a#back-to-top:hover {
+  @apply text-teal-hover;
+}
+
+input[type="text"]:focus,
+input[type="text"]:active,
+select:focus,
+select:active,
+textarea:focus,
+textarea:active {
+  @apply border-teal-hover;
+}
+
+@media (prefers-color-scheme: dark) {
+  a:hover h3,
+  a#back-to-top:hover {
+    @apply text-solarized-blue;
+  }
+
+  input[type="text"]:focus,
+  input[type="text"]:active,
+  select:focus,
+  select:active,
+  textarea:focus,
+  textarea:active {
+    @apply border-solarized-blue;
+  }
+}
+
+#content ol {
+  @apply list-decimal ml-4;
+}
+
+#content ul {
+  @apply list-disc ml-4;
+}
+
+#content footer ul {
+  @apply list-none ml-0;
+}
+
+ul.categories li:not(:first-of-type) {
+  @apply border-l border-gray-border;
+}
+
+
+@media (prefers-color-scheme: dark) {
+  /* Dim images in dark mode. From http://markdotto.com/2018/11/05/css-dark-mode/ */
+  img {
+    opacity: 0.75;
+    transition: opacity 0.5s ease-in-out;
+  }
+  img:hover {
+    opacity: 1;
+  }
+
+  ul.icons li {
+    @apply text-solarized-base00;
+  }
+}
+
+ul.icons {
+  @apply text-gray-subtitle;
+}
+
+ul.icons li {
+  display: inline-block;
+  padding: 0 1em 0 0;
+}
+
+.card .flickity-viewport {
+  @apply static;
+}
+
+@tailwind components;
+
+@tailwind utilities;

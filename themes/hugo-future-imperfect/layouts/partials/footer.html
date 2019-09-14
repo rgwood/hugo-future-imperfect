@@ -1,0 +1,91 @@
+    </div>
+    {{ partial "menu" . }}
+    <!-- Scripts -->
+
+      {{ $main := resources.Get "js/main.js" }}
+      {{ $bundle := slice $main | resources.Concat "js/bundle.js" | resources.Minify}}
+      <script src="{{ $bundle.RelPermalink }}"></script>
+
+    <!-- TODO: I had some trouble putting these in the main bundle, figure that out -->
+    {{ $flickity := resources.Get "js/flickity.pkgd.js" }}
+    {{ $flickityFullscreen := resources.Get "js/flickity.fullscreen.js" }}
+    {{ $flickityBundle := slice $flickity $flickityFullscreen | resources.Concat "js/flickity.bundle.js" | resources.Minify}}
+    <script src="{{ $flickityBundle.RelPermalink }}"></script>
+
+    <script>
+      let carousels = document.querySelectorAll(".carousel");
+      for (let carousel of carousels) {
+        let flickity = new Flickity(carousel,
+          {
+            fullscreen: true,
+            lazyLoad: true,
+            groupCells:false, 
+            imagesLoaded: true,
+            initialIndex: '.is-initial-select',
+            dragThreshold: 3,
+            // Font-awesome arrow-left path
+            arrowShape: 'M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z',
+            arrowViewBox: '0 0 448 512',
+            arrowViewBoxWidth: 448
+          });
+        // So we can hide the captions until the images are loaded, avoid weird layout flashes
+        flickity.on('lazyLoad', function (event, cellElement) {
+          cellElement.classList.add('lazyload-finished');
+        });
+
+        flickity.on('staticClick', function (event, pointer, cellElement, cellIndex) {
+          // dismiss if cell was not clicked
+          if (!cellElement) {
+            flickity.exitFullscreen();
+            return;
+          }
+          
+          // Clicking on the image caption should have no effect
+          if(pointer.target.tagName == 'FIGCAPTION') {
+            return;
+          }
+
+          // Clicking anywhere other than the image should close
+          if(pointer.target.tagName != 'IMG') {
+            flickity.exitFullscreen();
+            return;
+          }
+
+          if(flickity.selectedElements.includes(cellElement)) {            
+            flickity.toggleFullscreen();
+            flickity.selectCell(cellIndex, false, true);
+          } else {
+            flickity.selectCell(cellIndex);
+            flickity.viewFullscreen();
+          }
+        });
+
+        flickity.on('settle', clearAndResetIdle);
+      }
+
+      const timeToIdleInMs = 3000;
+      let idleIncrement = 0,
+          isIdle = false;
+      setInterval(()=>{
+        idleIncrement++;
+        if(idleIncrement === 2) {
+          isIdle = true;
+          document.documentElement.classList.add('idle');
+        }
+    }, timeToIdleInMs / 2);
+
+    function clearAndResetIdle() {
+      // Avoid expensive DOM calls unless they're needed
+      if(isIdle) {
+        document.documentElement.classList.remove('idle');
+      }
+      idleIncrement = 0;
+      isIdle = false;
+    };
+
+      document.addEventListener('mousemove', clearAndResetIdle);
+      document.addEventListener('touchmove', clearAndResetIdle);
+      document.addEventListener('click', clearAndResetIdle);
+    </script>
+  </body>
+</html>

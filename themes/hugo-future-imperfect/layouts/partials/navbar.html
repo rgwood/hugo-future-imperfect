@@ -1,0 +1,42 @@
+<!-- Header -->
+<header class="w-full z-50 fixed top-0 left-0 bg-white dark:bg-solarized-base02 border-b border-gray-border  flex justify-between h-12"
+    id="navbar-header">
+
+    <div class="px-6 flex sm:border-r border-gray-border h-full">
+        <h1 class="font-bold text-xxs tracking-widest uppercase self-center dark:text-solarized-base1"><a
+                href="{{ "/" | relURL }}">{{ .Site.Title }}</a>
+        </h1>
+    </div>
+
+    <nav class="links pl-2 flex-1 text-xxs self-center hidden sm:block">
+        <span class="flex">
+            <ul class="self-center leading-none">
+                {{ range .Site.Menus.main }}
+                <li class="border-l first:border-0 inline-block mr-3 border-gray-border">
+                    <a class="table ml-3 font-sans uppercase tracking-widest text-gray-subtitle dark:text-solarized-base1" href="{{ .URL }}">
+                        <i class="table-cell align-middle text-sm {{ .Identifier }}">&nbsp;</i><span class="table-cell align-middle">{{ .Name }}</span>
+                    </a>
+                </li>
+                {{ end }}
+            </ul>
+        </span>
+    </nav>
+    <nav class="">
+        <span class="flex">
+            <span class="border-l border-gray-border search hidden md:flex" id="search-pane">
+                <a class="icon-search text-gray-icons p-5 cursor-pointer float-left self-center" ></a>
+                <div class="self-center" id="search-form-container">
+                    <form id="search-form" class="float-left self-center max-w-0 overflow-hidden whitespace-no-wrap" method="get" action="//duckduckgo.com/">
+                        <input id="search-input"
+                            class="outline-none border border-gray-border bg-gray-background dark:bg-solarized-base02 dark:text-solarized-base2 pl-3 p-1 " type="text"
+                            name="q" placeholder="Search" />
+                        <input type="hidden" name="sites" value="{{ .Site.Params.searchDomain }}">
+                    </form>
+                </div>
+            </span>
+            <span class="menu flex border-l border-gray-border self-center h-full xl:hidden">
+                <a id="menuToggler" class="icon-bars text-gray-icons p-5" href="#menu"></a>
+            </span>
+        </span>
+    </nav>
+</header>

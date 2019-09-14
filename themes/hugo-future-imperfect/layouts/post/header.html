@@ -1,0 +1,18 @@
+<header class="flex flex-wrap sm:flex-no-wrap border-b border-gray-border uppercase font-sans tracking-widest">
+    <div class="title min-w-full sm:min-w-0 flex-grow text-center sm:text-left
+    p-2 pb-1 sm:p-6 xl:pl-8">
+        <h2 class="sm:text-2xl font-black dark:text-solarized-base1"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+        {{ with .Description }}
+            <p class="mt-2 sm:mt-4 text-xxs sm:text-xs text-gray-subtitle dark:text-solarized-base01">{{ . }}</p>
+        {{ end }}
+    </div>
+    <div class="meta sm:border-l  border-gray-border min-w-full sm:min-w-0 text-center flex flex-col justify-center p-2 sm:p-4 text-xs">
+        {{ $.Scratch.Set "dateType" .Date }}
+        <time class="published font-bold text-gray-subtitle dark:text-solarized-base0 sm:text-gray-header sm:mb-4"
+            datetime='{{ ($.Scratch.Get "dateType").Format "2006-01-02" }}'>
+            {{ ($.Scratch.Get "dateType").Format "January 2, 2006" }}</time>
+        {{ if .Site.Params.includeReadingTime }}
+            <p class="text-gray-subtitle dark:text-solarized-base01 hidden sm:block">{{ .ReadingTime }} minute read</p>
+        {{ end }}
+    </div>
+</header>

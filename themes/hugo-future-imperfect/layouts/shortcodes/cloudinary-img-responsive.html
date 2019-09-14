@@ -1,0 +1,8 @@
+{{ $path := .Get 0}}
+<img
+sizes="(min-width: 1200px) 76.5rem, calc(100vw - 1.5rem)"
+srcset="https://res.cloudinary.com/reilly-wood/image/upload/f_auto,c_limit,w_512/{{$path}} 512w,
+        https://res.cloudinary.com/reilly-wood/image/upload/f_auto,c_limit,w_1024/{{$path}} 1024w,
+        https://res.cloudinary.com/reilly-wood/image/upload/f_auto,c_limit,w_2048/{{$path}} 2048w"
+src="https://res.cloudinary.com/reilly-wood/image/upload/f_auto,c_limit,w_1024/{{$path}}"
+alt />
