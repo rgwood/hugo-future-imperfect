@@ -27,7 +27,7 @@ This is a very large rewrite focused on styling, performance, and developer tool
 1. CSS is automatically linted using [Stylelint](https://stylelint.io/)
 1. There are new shortcodes for images, email obfuscation, card elements...
 1. Site search is now done with [DuckDuckGo](https://duckduckgo.com) instead of Google
-1. Social sharing functionality has been removed, because I am a grouch about that.
+1. Social sharing functionality has been removed
 
 ## Basic Setup
 
